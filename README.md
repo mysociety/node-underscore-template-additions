@@ -35,7 +35,7 @@ One of the main reasons for this module is to allow templates to include other t
 </div>
 ````
 
-The original arguments are made available in the included template, with any arguments you specify being used to override them. The path to the template is relative to the path used in `loadFromDir`, or the Express `views`, not the parent template.
+The original arguments are made available in the included template, with any arguments you specify being used to override them. The path to the template is relative to the path used in `loadFromDir`, or the Express `views`, not the calling template.
 
 ### Using with the Express framework
 
@@ -65,7 +65,7 @@ define(
   [          'jquery', 'templates' ],
   function ( $,        templates   ) {
 
-    $('#someElement).html(
+    $('#someElement').html(
       templates.render(
         'some/template.html',
         { foo: 'bar' }
