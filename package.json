@@ -1,6 +1,6 @@
 {
   "name": "underscore-template-additions",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Template related additions to the underscore js library (inter template includes, AMD compilation, express helpers)",
   "homepage": "https://github.com/mysociety/node-underscore-template-additions",
   "bugs": {
