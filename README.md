@@ -80,26 +80,11 @@ This assumes that you make the compiled templates available as `templates.js` us
 
 ### Generating AMD compiled templates
 
-When you run in production you should write the compiled templates to a file and serve that as static content. A script like this should be called from your build script:
+When you run in production you should write the compiled templates to a file and serve that as static content. There is a provided script that will do this for you. The command line arguments should be the paths to the template and the result is printed to `STDOUT`.
 
-```javascript
-#!/usr/bin/env node
-
-var UTA   = require('underscore-template-additions');
-
-var templates = new UTA();
-
-var views_dir = '/path/to/your/templates';
-
-templates.loadFromDir(
-  views_dir,
-  function (err) {
-    if (err) throw err;
-    process.stdout.write( templates.asAMD() );
-  }
-);
+```bash
+uta-compile-templates-to-amd.js path/to/templates > public/js/templates.js
 ```
-
 
 ### Loading templates from several directories
 
