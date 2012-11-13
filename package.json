@@ -1,0 +1,40 @@
+{
+  "name": "underscore-template-additions",
+  "version": "0.0.0",
+  "description": "Template related additions to the underscore js library (inter template includes, AMD compilation, express helpers)",
+  "homepage": "https://github.com/mysociety/node-underscore-template-additions",
+  "bugs": {
+    "url": "https://github.com/mysociety/node-underscore-template-additions/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mysociety/node-underscore-template-additions.git"
+  },
+  "keywords": [
+    "template",
+    "underscore",
+    "AMD"
+  ],
+  "author": {
+    "name": "mySociety",
+    "email": "hello@mysociety.org",
+    "url": "http://www.mysociety.org"
+  },
+  "contributors": {
+    "name": "Edmund von der Burg",
+    "email": "evdb@mysociety.org"
+  },
+  "license": "GNU Affero General Public License",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "underscore": "*",
+    "walk": ">= 2.2.1"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  }
+}
