@@ -10,6 +10,9 @@
   "scripts": {
     "test": "mocha --reporter tap"
   },
+  "bin": {
+    "uta-compile-templates-to-amd": "./bin/uta-compile-templates-to-amd.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/mysociety/node-underscore-template-additions.git"
@@ -31,6 +34,7 @@
   "license": "GNU Affero General Public License",
   "readmeFilename": "README.md",
   "dependencies": {
+    "async": "*",
     "underscore": "*",
     "walk": ">= 2.2.1"
   },
