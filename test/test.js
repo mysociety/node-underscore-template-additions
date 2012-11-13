@@ -5,7 +5,7 @@ var assert = require("assert");
 
 
 
-describe('Connection', function(){
+describe('Templates', function(){
   var templates = null;
 
   beforeEach(function(done){
