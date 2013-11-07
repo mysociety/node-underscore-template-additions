@@ -16,11 +16,17 @@ var Template = function (args) {
   return this;
 };
 
+Template._extractViewNameFromPath = function(filename, viewsDir) {
+	var ret = filename.substring(viewsDir.length + path.sep.length);
+    if(path.sep == "\\")
+    	ret = ret.replace(/\\/g, "/");
+    
+    return ret;
+}
 
 Template.prototype.loadFromDir = function (dir, callback) {
 
   var self     = this;
-  var dirRegEx = new RegExp( '^' + dir + '/?' );
   
   // Check to see if we have already loaded this directory
   if ( self.cacheTemplates && self.loadedDirs[dir] ) {
@@ -31,7 +37,7 @@ Template.prototype.loadFromDir = function (dir, callback) {
 
   var loadTemplate = function(root, stat, next) {
     var filename     = path.join(root, stat.name);
-    var template_key = filename.replace(dirRegEx,'');
+    var template_key = Template._extractViewNameFromPath(filename, dir);
 
     fs.readFile(
       filename,
@@ -163,7 +169,7 @@ Template.prototype.forExpress = function() {
     // play along with this, but strip the 'views' dir off the path so that e have a
     // directory and a filename for ease of use later.
     var viewsDir     = options.settings.views;
-    var templateName = path.replace( new RegExp('^'+viewsDir+'/?'), '');
+    var templateName = Template._extractViewNameFromPath(path, viewsDir);
 
     self.loadFromDir(viewsDir, function(err) {      
 
