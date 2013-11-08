@@ -16,12 +16,15 @@ var Template = function (args) {
   return this;
 };
 
-Template._extractViewNameFromPath = function(filename, viewsDir) {
-  var ret = filename.substring(viewsDir.length + path.sep.length);
-    if(path.sep == "\\")
-      ret = ret.replace(/\\/g, "/");
+Template._extractViewNameFromPath = function(filename, viewsDir, pathSep) {
 
-    return ret;
+  filename = filename.split(pathSep).join('/')
+  viewsDir = viewsDir.split(pathSep).join('/')
+
+  // Remove the filepath from the string
+  var ret = filename.replace(new RegExp( '^' + viewsDir + "/?"), '');
+
+  return ret;
 }
 
 Template.prototype.loadFromDir = function (dir, callback) {
@@ -37,7 +40,7 @@ Template.prototype.loadFromDir = function (dir, callback) {
 
   var loadTemplate = function(root, stat, next) {
     var filename     = path.join(root, stat.name);
-    var template_key = Template._extractViewNameFromPath(filename, dir);
+    var template_key = Template._extractViewNameFromPath(filename, dir, path.sep);
 
     fs.readFile(
       filename,
@@ -169,7 +172,7 @@ Template.prototype.forExpress = function() {
     // play along with this, but strip the 'views' dir off the path so that e have a
     // directory and a filename for ease of use later.
     var viewsDir     = options.settings.views;
-    var templateName = Template._extractViewNameFromPath(path, viewsDir);
+    var templateName = Template._extractViewNameFromPath(path, viewsDir, path.sep);
 
     self.loadFromDir(viewsDir, function(err) {
 

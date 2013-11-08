@@ -56,6 +56,34 @@ describe('Templates', function(){
 });
 
 
+describe("Helpers", function () {
+  describe("_extractViewNameFromPath", function () {
+
+    var extract = UTA._extractViewNameFromPath;
+
+    var tests = [
+      // Unix
+      {sep: '/', filename: '/foo/bar/baz.html', viewsDir: '/foo/bar',  expected: 'baz.html'},
+      {sep: '/', filename: '/foo/bar/baz.html', viewsDir: '/foo/bar/', expected: 'baz.html'},
+      {sep: '/', filename: '/foo/bar/baz.html', viewsDir: '/foo',      expected: 'bar/baz.html'},
+      {sep: '/', filename: '/foo/bar/baz.html', viewsDir: '/foo/',     expected: 'bar/baz.html'},
+      // Windows
+      {sep: '\\', filename: '\\foo\\bar\\baz.html', viewsDir: '\\foo\\bar',   expected: 'baz.html'},
+      {sep: '\\', filename: '\\foo\\bar\\baz.html', viewsDir: '\\foo\\bar\\', expected: 'baz.html'},
+      {sep: '\\', filename: '\\foo\\bar\\baz.html', viewsDir: '\\foo',        expected: 'bar/baz.html'},
+      {sep: '\\', filename: '\\foo\\bar\\baz.html', viewsDir: '\\foo\\',      expected: 'bar/baz.html'},
+    ];
+
+    tests.forEach(function (test) {
+      it( test.filename + " -> " + test.viewsDir + " + " + test.expected, function () {
+        assert.equal(extract(test.filename, test.viewsDir, test.sep),  test.expected);
+      });
+    });
+
+  });
+});
+
+
 // "test outputting as AMD module": function (test) {
 //   test.expect(1);
 //   test.equal(
