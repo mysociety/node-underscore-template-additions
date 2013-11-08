@@ -17,22 +17,22 @@ var Template = function (args) {
 };
 
 Template._extractViewNameFromPath = function(filename, viewsDir) {
-	var ret = filename.substring(viewsDir.length + path.sep.length);
+  var ret = filename.substring(viewsDir.length + path.sep.length);
     if(path.sep == "\\")
-    	ret = ret.replace(/\\/g, "/");
-    
+      ret = ret.replace(/\\/g, "/");
+
     return ret;
 }
 
 Template.prototype.loadFromDir = function (dir, callback) {
 
   var self     = this;
-  
+
   // Check to see if we have already loaded this directory
   if ( self.cacheTemplates && self.loadedDirs[dir] ) {
     return callback();
   }
-  
+
   var walker  = walk.walk( dir );
 
   var loadTemplate = function(root, stat, next) {
@@ -63,7 +63,7 @@ Template.prototype.loadFromDir = function (dir, callback) {
     self.loadedDirs[dir] = true;
     callback();
   });
-  
+
   // walker.on('errors', function (root, errors, next) {
   //   callback(errors);
   //   next(errors);
@@ -118,7 +118,7 @@ Template.prototype.asAMD = function () {
 
   // Note - I'd like to put a 'use strict' in this, but the underscore template
   // code uses 'with' which it does not like.
-  
+
   var out = "";
   out += "define(                                                       \n";
   out += "  ['underscore'],                                             \n";
@@ -135,9 +135,9 @@ Template.prototype.asAMD = function () {
   out += "    return AMD;                                               \n";
   out += "  }                                                           \n";
   out += ");                                                            \n";
-  
+
   out = out.replace(/\s+\n/gm, "\n");
-  
+
   var amd = _.template(out, this);
 
   return amd;
@@ -147,15 +147,15 @@ Template.prototype.asAMD = function () {
 Template.prototype.middlewareAMD = function () {
   var self = this;
   return function ( req, res, next ) {
-    
+
     var views = req.app.get('views');
-    
-    self.loadFromDir( views, function(err) {      
+
+    self.loadFromDir( views, function(err) {
       res
         .set('Content-Type', 'application/javascript')
         .send( self.asAMD() );
     });
-    
+
   };
 };
 
@@ -171,7 +171,7 @@ Template.prototype.forExpress = function() {
     var viewsDir     = options.settings.views;
     var templateName = Template._extractViewNameFromPath(path, viewsDir);
 
-    self.loadFromDir(viewsDir, function(err) {      
+    self.loadFromDir(viewsDir, function(err) {
 
         if (err) return callback(err);
 

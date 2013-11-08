@@ -1,4 +1,4 @@
-"use strict"; 
+"use strict";
 
 var UTA = require('..');
 var assert = require("assert");
@@ -14,7 +14,7 @@ describe('Templates', function(){
     templates = new UTA(
       // { templateDir: __dirname + '/samples' }
     );
-    
+
     // init the templates, when done proceed
     templates.loadFromDir(
       __dirname + '/samples',
