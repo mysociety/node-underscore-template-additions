@@ -165,14 +165,14 @@ Template.prototype.middlewareAMD = function () {
 
 Template.prototype.forExpress = function() {
   var self = this;
-  return function (path, options, callback ) {
+  return function (viewPath, options, callback ) {
 
     // The .render method in express wants to check that the template file
     // exists before passing the path to the engine. To keep things simple for now
     // play along with this, but strip the 'views' dir off the path so that e have a
     // directory and a filename for ease of use later.
     var viewsDir     = options.settings.views;
-    var templateName = Template._extractViewNameFromPath(path, viewsDir, path.sep);
+    var templateName = Template._extractViewNameFromPath(viewPath, viewsDir, path.sep);
 
     self.loadFromDir(viewsDir, function(err) {
 
